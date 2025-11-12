@@ -2,6 +2,7 @@ import os, re
 import pandas as pd
 from datetime import datetime
 from openpyxl import Workbook
+import streamlit as st
 
 # ---------- CONFIG ----------
 BASE_DIR       = os.path.join(os.getcwd(), "daily")
@@ -28,7 +29,10 @@ def write_log(msg: str):
 
 def canonize(name: str) -> str:
     return re.sub(r'[^a-z0-9]+', '_', str(name).lower())
-
+uploaded_file = st.file_uploader("Upload Excel file", type=["xlsx"])
+if uploaded_file:
+    df = pd.read_excel(uploaded_file, dtype=object)
+    st.write(df.head())  # just to check
 def resolve_column(actual_cols, candidates):
     cmap = {canonize(c): c for c in actual_cols}
     for cand in candidates:
@@ -206,3 +210,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
