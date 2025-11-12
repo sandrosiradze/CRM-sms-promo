@@ -147,7 +147,7 @@ def export_requested_dep(df, userid, reqdep):
     return output
 
 # ---------------- STREAMLIT APP ----------------
-st.title("CRM SMS Promo Processor")
+st.title("CRM SMS Promo")
 
 uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
 if uploaded_file:
@@ -196,3 +196,4 @@ if uploaded_file:
         st.error(f"Error processing file: {e}")
 else:
     st.info("Please upload an Excel file to continue.")
+
